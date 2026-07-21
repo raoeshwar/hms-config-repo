@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  notification-db:
+    image: postgres:15-alpine
+    container_name: notification_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: hms_notification_db
+    ports:
+      - "5438:5432"
+    volumes:
+      - notification_data:/var/lib/postgresql/data
+    networks:
+      - hms-network
+
+volumes:
+  notification_data:
+
+networks:
+  hms-network:
+    external: true

@@ -1,0 +1,8 @@
+server:
+  port: 8082 6379
+
+spring:
+  application:
+    name: doctor-service
+  config:
+    import: optional:configserver:http://localhost:8888

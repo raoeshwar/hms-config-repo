@@ -1,0 +1,15 @@
+.metadata/
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+.idea/
+*.iml
+.vscode/
+logs/
+*.log
+config-repo/

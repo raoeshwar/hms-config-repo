@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  patient-db:
+    image: postgres:15-alpine
+    container_name: patient_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: hms_patient_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - patient_db_data:/var/lib/postgresql/data
+
+  patient-redis:
+    image: redis:7-alpine
+    container_name: patient_redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  patient_db_data:

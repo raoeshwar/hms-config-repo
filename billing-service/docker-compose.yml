@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  billing-db:
+    image: postgres:15-alpine
+    container_name: billing_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: hms_billing_db
+    ports:
+      - "5437:5432"
+    volumes:
+      - billing_data:/var/lib/postgresql/data
+    networks:
+      - hms-network
+
+volumes:
+  billing_data:
+
+networks:
+  hms-network:
+    external: true

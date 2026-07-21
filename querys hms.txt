@@ -1,0 +1,70 @@
+1. Auth Service Database (hms_auth_db)
+Run this to populate users (The Role is stored directly in the users table).
+
+sql
+
+CREATE SCHEMA IF NOT EXISTS auth_schema;
+SET search_path TO auth_schema;
+-- Insert Users (Password is 'password' hashed with BCrypt)
+INSERT INTO users (id, first_name, last_name, email, phone, password, role, status, created_at, updated_at) 
+VALUES (1, 'Admin', 'User', 'admin@hms.com', '1234567890', '$2a$10$O0Fq/pL9g0kP/nO4Yj.gH.e4u/0d0h.H0V.I8/aO/E/E6W5S/yK1q', 'ADMIN', true, NOW(), NOW());
+INSERT INTO users (id, first_name, last_name, email, phone, password, role, status, created_at, updated_at) 
+VALUES (2, 'Gregory', 'House', 'house@hms.com', '4445556666', '$2a$10$O0Fq/pL9g0kP/nO4Yj.gH.e4u/0d0h.H0V.I8/aO/E/E6W5S/yK1q', 'DOCTOR', true, NOW(), NOW());
+INSERT INTO users (id, first_name, last_name, email, phone, password, role, status, created_at, updated_at) 
+VALUES (3, 'John', 'Doe', 'john@gmail.com', '1234567890', '$2a$10$O0Fq/pL9g0kP/nO4Yj.gH.e4u/0d0h.H0V.I8/aO/E/E6W5S/yK1q', 'PATIENT', true, NOW(), NOW());
+INSERT INTO users (id, first_name, last_name, email, phone, password, role, status, created_at, updated_at) 
+VALUES (4, 'Pam', 'Beesly', 'pam@hms.com', '9876543210', '$2a$10$O0Fq/pL9g0kP/nO4Yj.gH.e4u/0d0h.H0V.I8/aO/E/E6W5S/yK1q', 'RECEPTIONIST', true, NOW(), NOW());
+2. Patient Service Database (hms_patient_db)
+Run this to populate patient records.
+
+sql
+
+CREATE SCHEMA IF NOT EXISTS patient_schema;
+SET search_path TO patient_schema;
+INSERT INTO patient (id, patient_code, first_name, last_name, gender, date_of_birth, age, blood_group, phone, email, address, city, state, country, emergency_contact_name, emergency_contact_number, status, created_at, updated_at) 
+VALUES 
+(1, 'PAT000001', 'John', 'Doe', 'Male', '1990-05-15', 36, 'O+', '1234567890', 'john@gmail.com', '123 Main St', 'New York', 'NY', 'USA', 'Jane Doe', '0987654321', true, NOW(), NOW()),
+(2, 'PAT000002', 'Sarah', 'Connor', 'Female', '1985-08-22', 41, 'A-', '5551234567', 'sarah@skynet.com', '456 Elm St', 'Los Angeles', 'CA', 'USA', 'John Connor', '5559876543', true, NOW(), NOW());
+3. Doctor Service Database (hms_doctor_db)
+Run this to populate doctor profiles.
+
+sql
+
+CREATE SCHEMA IF NOT EXISTS doctor_schema;
+SET search_path TO doctor_schema;
+INSERT INTO doctor (id, doctor_code, first_name, last_name, gender, email, phone, specialization, qualification, experience, hospital, department, available_from, available_to, consultation_fee, status, created_at, updated_at) 
+VALUES 
+(1, 'DOC0001', 'Alice', 'Smith', 'Female', 'smith@hms.com', '1112223333', 'Cardiology', 'MD, FACC', 15, 'City General Hospital', 'Cardiology', '09:00:00', '17:00:00', 150.00, true, NOW(), NOW()),
+(2, 'DOC0002', 'Gregory', 'House', 'Male', 'house@hms.com', '4445556666', 'Diagnostic Medicine', 'MD', 20, 'Princeton-Plainsboro', 'Diagnostics', '10:00:00', '18:00:00', 300.00, true, NOW(), NOW());
+4. Appointment Service Database (hms_appointment_db)
+Run this to populate appointments.
+
+sql
+
+CREATE SCHEMA IF NOT EXISTS appointment_schema;
+SET search_path TO appointment_schema;
+INSERT INTO appointment (id, appointment_number, patient_id, doctor_id, appointment_date, start_time, end_time, reason, status, created_at, updated_at) 
+VALUES 
+(1, 'APT10001', 'PAT000001', 'DOC0001', CURRENT_DATE, '10:00:00', '10:30:00', 'Routine checkup', 'CONFIRMED', NOW(), NOW()),
+(2, 'APT10002', 'PAT000002', 'DOC0002', CURRENT_DATE + INTERVAL '1 day', '11:00:00', '11:30:00', 'Severe headache', 'BOOKED', NOW(), NOW()),
+(3, 'APT10003', 'PAT000001', 'DOC0002', CURRENT_DATE - INTERVAL '5 days', '14:00:00', '14:30:00', 'Follow up', 'COMPLETED', NOW(), NOW());
+5. Medical Record Service Database (hms_medical_record_db)
+Run this to populate clinical history (Linked to the completed appointment).
+
+sql
+
+CREATE SCHEMA IF NOT EXISTS medicalrecord_schema;
+SET search_path TO medicalrecord_schema;
+INSERT INTO medical_record (id, record_id, patient_id, doctor_id, appointment_id, diagnosis, symptoms, prescription, allergies, lab_tests, notes, visit_date, created_at, updated_at) 
+VALUES 
+(1, 'MR-0001', 'PAT000001', 'DOC0002', 'APT10003', 'Mild Hypertension', 'Dizziness, high BP reading', 'Lisinopril 10mg daily', 'Penicillin', 'Complete Blood Count (CBC), Lipid Panel', 'Advised to reduce sodium intake and exercise regularly', CURRENT_DATE - INTERVAL '5 days', NOW(), NOW());
+6. Billing Service Database (hms_billing_db)
+Run this to populate financial records (Linked to the completed appointment).
+
+sql
+
+CREATE SCHEMA IF NOT EXISTS billing_schema;
+SET search_path TO billing_schema;
+INSERT INTO bill (id, bill_number, patient_id, appointment_id, consultation_fee, laboratory_fee, pharmacy_fee, room_charge, other_charges, tax_amount, discount, total_amount, insurance_coverage, net_payable, payment_status, payment_method, bill_date, due_date, created_at, updated_at) 
+VALUES 
+(1, 'INV-2026-0001', 'PAT000001', 'APT10003', 300.00, 150.00, 0.00, 0.00, 0.00, 45.00, 20.00, 475.00, 200.00, 275.00, 'PENDING', 'CREDIT_CARD', CURRENT_DATE - INTERVAL '5 days', CURRENT_DATE + INTERVAL '10 days', NOW(), NOW());

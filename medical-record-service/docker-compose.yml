@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  medical-record-db:
+    image: postgres:15-alpine
+    container_name: medical_record_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: hms_medical_record_db
+    ports:
+      - "5436:5432"
+    volumes:
+      - medical_record_data:/var/lib/postgresql/data
+    networks:
+      - hms-network
+
+volumes:
+  medical_record_data:
+
+networks:
+  hms-network:
+    external: true
