@@ -5,9 +5,9 @@ spring:
   application:
     name: billing-service
   datasource:
-    url: jdbc:postgresql://localhost:5437/hms_billing_db
+    url: jdbc:postgresql://localhost:5432/hms_billing_db
     username: postgres
-    password: password
+    password: root
   jpa:
     hibernate:
       ddl-auto: update

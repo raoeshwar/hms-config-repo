@@ -5,9 +5,9 @@ spring:
   application:
     name: medical-record-service
   datasource:
-    url: jdbc:postgresql://localhost:5436/hms_medical_record_db
+    url: jdbc:postgresql://localhost:5432/hms_medical_record_db
     username: postgres
-    password: password
+    password: root
   jpa:
     hibernate:
       ddl-auto: update

@@ -5,9 +5,9 @@ spring:
   application:
     name: doctor-service
   datasource:
-    url: jdbc:postgresql://localhost:5434/hms_doctor_db
+    url: jdbc:postgresql://localhost:5432/hms_doctor_db
     username: postgres
-    password: password
+    password: root
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

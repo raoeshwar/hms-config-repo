@@ -5,9 +5,9 @@ spring:
   application:
     name: notification-service
   datasource:
-    url: jdbc:postgresql://localhost:5438/hms_notification_db
+    url: jdbc:postgresql://localhost:5432/hms_notification_db
     username: postgres
-    password: password
+    password: root
   jpa:
     hibernate:
       ddl-auto: update
