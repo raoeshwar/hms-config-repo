@@ -27,7 +27,7 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
 jwt:
-  secret: hms_super_secret_key_that_must_be_long_enough_for_hs256_algorithm
+  secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
 
 appointment:
   service:
