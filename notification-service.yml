@@ -5,7 +5,6 @@ spring:
   application:
     name: notification-service
 
-    
   datasource:
     url: jdbc:postgresql://localhost:5432/hms_notification_db
     username: postgres
@@ -24,8 +23,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         default_schema: notification_schema
 
-        
-kafka:
+  kafka:
     bootstrap-servers: localhost:9092
     consumer:
       group-id: notification-group
@@ -35,15 +33,15 @@ kafka:
       properties:
         spring.json.trusted.packages: "*"
         
-mail:
-  host: smtp.gmail.com
-  port: 587
-  username: udemo8003@gmail.com
-  password: oxpk duvs depn tkbb
-  properties:
-    mail:
-      smtp:
-        auth: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: udemo8003@gmail.com
+    password: oxpk duvs depn tkbb
+    properties:
+      mail:
+        smtp:
+          auth: true
           starttls:
             enable: true
 
@@ -69,6 +67,5 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
   instance:
     hostname: localhost
-
 
 
