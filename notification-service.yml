@@ -29,11 +29,11 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: "*"
-  mail:
-    host: smtp.example.com
+mail:
+    host: smtp.gmail.com
     port: 587
-    username: dummy@example.com
-    password: password
+    username: udemo8003@gmail.com
+    password: oxpk duvs depn tkbb
     properties:
       mail:
         smtp:
