@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: notification-service
+
+    
   datasource:
     url: jdbc:postgresql://localhost:5432/hms_notification_db
     username: postgres
@@ -11,6 +13,7 @@ spring:
     hikari:
       maximum-pool-size: 5
       minimum-idle: 1
+      
   jpa:
     hibernate:
       ddl-auto: update
@@ -20,6 +23,8 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
         default_schema: notification_schema
+
+        
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
@@ -29,6 +34,7 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: "*"
+        
 mail:
     host: smtp.gmail.com
     port: 587
@@ -43,6 +49,14 @@ mail:
 
 jwt:
   secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+  
+twilio:
+  account:
+    sid: ACc84b71a806c85d0aab43824106b237da
+  auth:
+    token: 8731b6587c15947bf01181beec561a0a
+  phone:
+    number: "8106544219"
 
 logging:
   level:
@@ -55,12 +69,6 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
   instance:
     hostname: localhost
-twilio:
-  account:
-    sid: ACc84b71a806c85d0aab43824106b237da
-  auth:
-    token: 8731b6587c15947bf01181beec561a0a
-  phone:
-    number: "8106544219"
+
 
 
