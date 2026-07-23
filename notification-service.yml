@@ -52,7 +52,7 @@ twilio:
   account:
     sid: ACc84b71a806c85d0aab43824106b237da
   auth:
-    token: 8731b6587c15947bf01181beec561a0a
+    token: 52c677c21608df41e23736b37e3ebfa5
   phone:
     number: "8106544219"
 
