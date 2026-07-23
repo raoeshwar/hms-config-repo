@@ -55,5 +55,12 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
   instance:
     hostname: localhost
+twilio:
+  account:
+    sid: ACc84b71a806c85d0aab43824106b237da
+  auth:
+    token: 8731b6587c15947bf01181beec561a0a
+  phone:
+    number: "8106544219"
 
 
