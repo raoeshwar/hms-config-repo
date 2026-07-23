@@ -68,10 +68,3 @@ eureka:
   instance:
     hostname: localhost
 
-twilio:
-  account:
-    sid: REPLACE_ME_WITH_TWILIO_SID
-  auth:
-    token: REPLACE_ME_WITH_TWILIO_TOKEN
-  phone:
-    number: "REPLACE_ME_WITH_TWILIO_NUMBER"
