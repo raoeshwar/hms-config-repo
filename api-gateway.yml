@@ -14,7 +14,7 @@ spring:
         - id: auth-service
           uri: lb://AUTH-SERVICE
           predicates:
-            - Path=/api/auth/**
+            - Path=/api/auth/**, /api/admin/users/**
 
         - id: patient-service
           uri: lb://PATIENT-SERVICE
@@ -40,6 +40,79 @@ spring:
           uri: lb://BILLING-SERVICE
           predicates:
             - Path=/api/v1/bills/**
+            
+        - id: notification-service
+          uri: lb://NOTIFICATION-SERVICE
+          predicates:
+            - Path=/api/v1/notifications/**
+
+        # --- OpenAPI Routes ---
+        - id: auth-service-openapi
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/v3/api-docs/auth-service
+          filters:
+            - RewritePath=/v3/api-docs/auth-service, /v3/api-docs
+
+        - id: patient-service-openapi
+          uri: lb://PATIENT-SERVICE
+          predicates:
+            - Path=/v3/api-docs/patient-service
+          filters:
+            - RewritePath=/v3/api-docs/patient-service, /v3/api-docs
+
+        - id: doctor-service-openapi
+          uri: lb://DOCTOR-SERVICE
+          predicates:
+            - Path=/v3/api-docs/doctor-service
+          filters:
+            - RewritePath=/v3/api-docs/doctor-service, /v3/api-docs
+
+        - id: appointment-service-openapi
+          uri: lb://APPOINTMENT-SERVICE
+          predicates:
+            - Path=/v3/api-docs/appointment-service
+          filters:
+            - RewritePath=/v3/api-docs/appointment-service, /v3/api-docs
+
+        - id: medical-record-service-openapi
+          uri: lb://MEDICAL-RECORD-SERVICE
+          predicates:
+            - Path=/v3/api-docs/medical-record-service
+          filters:
+            - RewritePath=/v3/api-docs/medical-record-service, /v3/api-docs
+
+        - id: billing-service-openapi
+          uri: lb://BILLING-SERVICE
+          predicates:
+            - Path=/v3/api-docs/billing-service
+          filters:
+            - RewritePath=/v3/api-docs/billing-service, /v3/api-docs
+
+        - id: notification-service-openapi
+          uri: lb://NOTIFICATION-SERVICE
+          predicates:
+            - Path=/v3/api-docs/notification-service
+          filters:
+            - RewritePath=/v3/api-docs/notification-service, /v3/api-docs
+
+springdoc:
+  swagger-ui:
+    urls:
+      - name: Auth Service
+        url: /v3/api-docs/auth-service
+      - name: Patient Service
+        url: /v3/api-docs/patient-service
+      - name: Doctor Service
+        url: /v3/api-docs/doctor-service
+      - name: Appointment Service
+        url: /v3/api-docs/appointment-service
+      - name: Medical Record Service
+        url: /v3/api-docs/medical-record-service
+      - name: Billing Service
+        url: /v3/api-docs/billing-service
+      - name: Notification Service
+        url: /v3/api-docs/notification-service
 
 eureka:
   client:
